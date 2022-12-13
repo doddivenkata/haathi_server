@@ -1,0 +1,12 @@
+GET http://localhost:5000/api/get/
+
+###
+
+POST http://localhost:5000/api/register/
+Content-Type: application/json
+
+{
+    "userName":"Venkata suresh doddi",
+    "userEmail":"Venkatasuresh@gmail.com",
+    "userPassword":"qwer123"
+}
