@@ -31,8 +31,6 @@ app.get("/get/",(req,res)=>{
 
 
 app.post("/register/",async(req,res)=>{
- 
-
   const {userName,userEmail,userPassword} = req.body
   const hashedPassword = await bcrypt.hash(userPassword,10)
   const selectUserQuery = "SELECT * FROM userDetails WHERE email_id = ?";
@@ -74,7 +72,7 @@ app.post("/register/",async(req,res)=>{
             if (response) {
             //   req.session.user = result;
             //   console.log(req.session.user);
-              res.send({message:"Login Success"});
+              res.send({jwt_token:result[0].password});
             } else {
               res.send({ message: "Wrong username/password combination!" });
             }
