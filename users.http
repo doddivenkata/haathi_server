@@ -1,3 +1,6 @@
+
+
+
 GET http://localhost:5000/get
 
 ###
@@ -6,9 +9,9 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "userName":"ashok",
-    "userEmail":"askokadari@gmail.com",
-    "userPassword":"ashok@123"
+    "userName":"ggg",
+    "userEmail":"ggg@gmail.com",
+    "userPassword":"ggg123"
 }
 
 ###
