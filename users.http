@@ -9,9 +9,9 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "userName":"ggg",
-    "userEmail":"ggg@gmail.com",
-    "userPassword":"ggg123"
+    "userName":"suresh",
+    "userEmail":"suresh@gmail.com",
+    "userPassword":"qwe123"
 }
 
 ###
@@ -19,6 +19,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "userName":"ashok",
-    "userPassword":"ashok@123"
+    "userEmail":"venkata@gmail.com",
+    "userPassword":"qwee123"
 }
+

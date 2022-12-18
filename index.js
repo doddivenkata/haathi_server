@@ -4,7 +4,7 @@ const cors = require('cors')
 const app = express()
 const mysql = require("mysql")
 const bcrypt = require("bcrypt")
-const { response } = require('express')
+const jwt =require("jsonwebtoken")
 
 
 
@@ -18,15 +18,9 @@ const db = mysql.createPool({
 
 
 app.use(express.json())
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.urlencoded({extended:true}))
 
 //API for get all users
@@ -50,7 +44,7 @@ app.post("/register", async(req,res)=>{
          }
     if(result.length > 0){
         
-          res.send("all ready exists")
+          res.send("Email already exists")
         }else{
           const sqlInsert = "INSERT INTO userDetails(name,email_id,password) VALUES(?,?,?)";
           db.query(sqlInsert,[userName,userEmail,hashedPassword],(err,result)=>{
@@ -72,10 +66,10 @@ app.post("/register", async(req,res)=>{
 
 //API for login
 app.post("/login", (req, res) => {
-  const {userName,userPassword} = req.body
-  const SelectUser = "SELECT * FROM userDetails WHERE name = ?";
+  const {userEmail,userPassword} = req.body
+  const SelectUser = "SELECT * FROM userDetails WHERE email_id = ?";
 
-  db.query(SelectUser,[userName],(err, result) => {
+  db.query(SelectUser,[userEmail],(err, result) => {
       if (err) {
         res.send({ err: err });
       }
@@ -83,15 +77,16 @@ app.post("/login", (req, res) => {
       if (result.length > 0) {
         bcrypt.compare(userPassword, result[0].password, (error, response) => {
           if (response) {
-          //   req.session.user = result;
-          //   console.log(req.session.user);
-            res.send({jwt_token:result[0].password});
+          const payload = {username :userEmail}
+          const jwtToken = jwt.sign(payload,"sureshinndata")
+          res.send({jwtToken})
+
           } else {
-            res.send({ message: "Wrong username/password combination!" });
+            res.send("Wrong username/password combination!" );
           }
         });
       } else {
-        res.send({ message: "User doesn't exist" });
+        res.send("User doesn't exist" );
       }
     }
   );
