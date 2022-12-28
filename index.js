@@ -7,7 +7,7 @@ const app = express()
 const mysql = require("mysql")
 const bcrypt = require("bcrypt")
 const jwt =require("jsonwebtoken")
-
+const port = process.env.PORT || 5000
 
 
 const db = mysql.createPool({
@@ -99,6 +99,6 @@ app.post("/login", (req, res) => {
 
 
 
-app.listen(5000,()=>{
-    console.log("Server is running on port 5000")
+app.listen(port,()=>{
+    console.log(`Server is running on port ${port}`)
 })
