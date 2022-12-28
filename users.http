@@ -1,6 +1,4 @@
 
-
-
 GET http://localhost:5000/get
 
 ###
@@ -23,3 +21,12 @@ Content-Type: application/json
     "userPassword":"qwee123"
 }
 
+###
+POST https://superset.haathi.ai/api/v1/security/login
+Content-Type: application/json
+
+{ "password": "admin",
+  "provider": "db",
+  "refresh": true,
+  "username": "admin"
+}
